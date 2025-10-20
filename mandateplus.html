@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mandate Properties - Luxury Shortlet Apartments in Lagos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #c9a961;
+      --primary-dark: #a08549;
+      --dark: #1a1a1a;
+      --light: #f8f7f4;
+      --gray: #666;
+      --white: #ffffff;
+      --green: #25D366;
+      --available: #44ff88;
+      --booked: #ff4444;
+      --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: all 0.3s ease;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      overflow-x: hidden;
+      background: var(--light);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(26, 26, 26, 0.95);
+      backdrop-filter: blur(20px);
+      transition: var(--transition);
+      padding: 1rem 0;
+    }
+
+    header.scrolled {
+      padding: 0.7rem 0;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      position: relative;
+      display: inline-block;
+    }
+
+    .logo img {
+      height: 4rem;
+      width: 4rem;
+      border-radius: 50%;
+      object-fit: cover;
+      vertical-align: middle;
+      transition: var(--transition);
+    }
+
+    .logo img:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+      
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 400;
+      transition: var(--transition);
+      position: relative;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white);
+      padding: 0.7rem 2rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: var(--transition);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+      background: url('maggie.jpg');
+      background-size: cover;
+      background-position: center center;
+      animation: subtleFloat 25s ease-in-out infinite;
+    }
+
+    @keyframes subtleFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-15px) scale(1.01); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--white);
+      max-width: 900px;
+      padding: 0 2rem;
+      margin-top: 4rem;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero h1 {
+      margin-top: 4rem;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      margin-bottom: 1rem;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), #f4e4c1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 3rem;
+      animation: fadeIn 1.5s ease-out 0.5s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .stat {
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .stat:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* Featured Property Spotlight */
+    .featured-spotlight {
+      padding: 6rem 2rem 4rem;
+      background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-spotlight::before {
+      content: '✨';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      font-size: 300px;
+      opacity: 0.03;
+      animation: rotateGlow 30s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .featured-spotlight h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      letter-spacing: -1px;
+      color: var(--white);
+    }
+
+    .featured-subtitle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.1rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Filter Section */
+    .filter-section {
+      padding: 2rem;
+      background: var(--white);
+      position: sticky;
+      top: 80px;
+      z-index: 100;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .filter-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 0.7rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--dark);
+      border-radius: 50px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 5px 15px rgba(201, 169, 97, 0.3);
+    }
+
+    /* Properties Section */
+    .properties {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, var(--light) 0%, var(--white) 100%);
+    }
+
+    .properties h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    .properties-subtitle {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1.1rem;
+      margin-bottom: 4rem;
+    }
+
+    .property-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .property-card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .property-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .property-image {
+      height: 280px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(45deg, #ddd, #eee);
+    }
+
+    .property-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .property-card:hover .property-image img {
+      transform: scale(1.1);
+    }
+
+    .availability-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .badge-available {
+      background: rgba(68, 255, 136, 0.95);
+      color: var(--dark);
+    }
+
+    .badge-booked {
+      background: rgba(255, 68, 68, 0.95);
+      color: var(--white);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .location-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(26, 26, 26, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .location-badge::before {
+      content: '📍';
+    }
+
+    .property-content {
+      padding: 2rem;
+    }
+
+    .property-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .property-features {
+      display: flex;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .feature-badge {
+      background: rgba(201, 169, 97, 0.1);
+      color: var(--primary);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .property-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-view {
+      flex: 1;
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+
+    .btn-view:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201, 169, 97, 0.3);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background: var(--white);
+      animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: rgba(26, 26, 26, 0.9);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 2001;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      background: var(--primary);
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    .modal-header {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+    }
+
+    .modal-gallery {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+
+    .modal-gallery::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-item {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 60vh;
+      object-fit: cover;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .gallery-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .gallery-dot.active {
+      background: var(--primary);
+      transform: scale(1.3);
+    }
+
+    .gallery-counter {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .gallery-arrows {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .gallery-arrow {
+      width: 50px;
+      height: 50px;
+      background: rgba(26, 26, 26, 0.8);
+      backdrop-filter: blur(10px);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      pointer-events: all;
+      transition: var(--transition);
+    }
+
+    .gallery-arrow:hover {
+      background: var(--primary);
+      transform: scale(1.1);
+    }
+
+    .modal-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    .modal-title {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .modal-location {
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .modal-location::before {
+      content: '📍';
+    }
+
+    .modal-tabs {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 1rem 2rem;
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(201, 169, 97, 0.05);
+      border-radius: 15px;
+      transition: var(--transition-fast);
+    }
+
+    .amenity-item:hover {
+      background: rgba(201, 169, 97, 0.1);
+      transform: translateX(5px);
+    }
+
+    .amenity-icon {
+      font-size: 1.5rem;
+    }
+
+    .amenity-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .calendar-section {
+      margin: 2rem 0;
+    }
+
+    .calendar-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .calendar-header h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .calendar-day-label {
+      text-align: center;
+      font-weight: 600;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      transition: var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .calendar-day.available {
+      background: rgba(68, 255, 136, 0.1);
+      color: var(--dark);
+    }
+
+    .calendar-day.available:hover {
+      background: rgba(68, 255, 136, 0.3);
+      transform: scale(1.1);
+    }
+
+    .calendar-day.booked {
+      background: rgba(255, 68, 68, 0.1);
+      color: var(--gray);
+      cursor: not-allowed;
+    }
+
+    .calendar-day.today {
+      border: 2px solid var(--primary);
+      font-weight: 700;
+    }
+
+    .calendar-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+    }
+
+    .legend-available {
+      background: rgba(68, 255, 136, 0.3);
+    }
+
+    .legend-booked {
+      background: rgba(255, 68, 68, 0.3);
+    }
+
+    .whatsapp-section {
+      background: linear-gradient(135deg, var(--green), #20ba5a);
+      padding: 3rem;
+      border-radius: 20px;
+      text-align: center;
+      margin: 3rem 0;
+      color: var(--white);
+    }
+
+    .whatsapp-section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .whatsapp-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .btn-whatsapp {
+      background: var(--white);
+      color: var(--green);
+      padding: 1.2rem 3rem;
+      border-radius: 50px;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-whatsapp::before {
+      content: '💬';
+      font-size: 1.3rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: var(--white);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .social-icon:hover {
+      background: var(--primary);
+      transform: translateY(-5px) rotate(5deg);
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 2px;
+      background: var(--white);
+      transition: var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Loading State */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--white);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    /* Mobile First - Phones (up to 480px) */
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0 1rem;
+      }
+
+      .logo img {
+        height: 3rem;
+        width: 3rem;
+      }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 26, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem 1rem;
+        gap: 1rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 6rem 1rem 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        margin-top: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .featured-spotlight {
+        padding: 4rem 1rem;
+      }
+
+      .featured-spotlight h2 {
+        font-size: 2rem;
+      }
+
+      .filter-section {
+        top: 70px;
+        padding: 1rem;
+      }
+
+      .filter-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .properties {
+        padding: 4rem 1rem;
+      }
+
+      .properties h2 {
+        font-size: 2rem;
+      }
+
+      .property-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .property-image {
+        height: 250px;
+      }
+
+      .property-content {
+        padding: 1.5rem;
+      }
+
+      .property-content h3 {
+        font-size: 1.3rem;
+      }
+
+      .modal-close {
+        top: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+      }
+
+      .modal-header {
+        height: 50vh;
+      }
+
+      .gallery-item img {
+        height: 50vh;
+      }
+
+      .gallery-counter {
+        top: 1rem;
+        left: 1rem;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      .gallery-arrows {
+        padding: 0 1rem;
+      }
+
+      .gallery-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+
+      .modal-body {
+        padding: 2rem 1rem;
+      }
+
+      .modal-title {
+        font-size: 1.8rem;
+      }
+
+      .modal-tabs {
+        gap: 0.5rem;
+      }
+
+      .tab-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .amenities-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .calendar-grid {
+        gap: 0.3rem;
+      }
+
+      .calendar-day {
+        font-size: 0.8rem;
+      }
+
+      .calendar-legend {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .whatsapp-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .whatsapp-section h3 {
+        font-size: 1.5rem;
+      }
+
+      .btn-whatsapp {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+
+      footer {
+        padding: 2rem 1rem;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    /* Large Phones (481px - 768px) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .property-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .property-image {
+        height: 220px;
+      }
+
+      .hero-stats {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Tablets (769px - 1024px) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .navbar {
+        padding: 0 1.5rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+
+      .property-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .property-image {
+        height: 260px;
+      }
+
+      .amenities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .modal-body {
+        padding: 2.5rem;
+      }
+    }
+
+    /* Large Tablets and Small Laptops (1025px - 1280px) */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+      .property-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Touch device enhancements */
+    @media (hover: none) and (pointer: coarse) {
+      .property-card:active {
+        transform: scale(0.98);
+      }
+
+      .btn:active, .btn-view:active, .btn-whatsapp:active {
+        transform: scale(0.95);
+      }
+
+      .filter-btn:active {
+        transform: scale(0.95);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header id="header">
+    <nav class="navbar">
+      <div class="logo">
+        <img src="mann.png" alt="Mandate Properties Logo">
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="https://wa.me/2348039197608?text=Hi%2C%20I%27m%20interested%20in%20your%20luxury%20apartments" class="btn" target="_blank">WhatsApp Us</a>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>Mandate Properties <span>Luxury Shortlets</span></h1>
+      <p>Premium apartments in Lagos - Book by the day, week, or month</p>
+      <a href="#properties" class="btn">Explore Properties</a>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">7</span>
+          <span class="stat-label">Luxury Properties</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Client Satisfaction</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all">All Properties</button>
+      <button class="filter-btn" data-filter="victoria-island">Victoria Island</button>
+      <button class="filter-btn" data-filter="lekki">Lekki</button>
+      <button class="filter-btn" data-filter="1bed">1 Bedroom</button>
+      <button class="filter-btn" data-filter="2bed">2 Bedrooms</button>
+      <button class="filter-btn" data-filter="3bed">3 Bedrooms</button>
+      <button class="filter-btn" data-filter="4bed">4 Bedrooms</button>
+    </div>
+  </section>
+
+  <!-- Properties Section -->
+  <section id="properties" class="properties reveal">
+    <h2>Our Exclusive Collection</h2>
+    <p class="properties-subtitle">Handpicked luxury apartments across Lagos</p>
+    
+    <div class="property-grid">
+      <!-- Property 1: Oniru 4-Bed Villa -->
+      <div class="property-card" data-category="victoria-island 4bed" data-property="oniru-villa">
+        <div class="property-image">
+          <span class="availability-badge badge-available">Available</span>
+          <span class="location-badge">Oniru, Victoria Island</span>
+          <!-- Replace with actual image -->
+          <img src="oniru/property-oniru-villa-1.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Oniru Luxury 4-Bed Villa</h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 4 Bedrooms</span>
+            <span class="feature-badge">🚿 4 Bathrooms</span>
+            <span class="feature-badge">🏊 Pool</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('oniru-villa')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 2: Lekki Phase 1 Penthouse -->
+      <div class="property-card" data-category="lekki 4bed" data-property="lekki-penthouse">
+        <div class="property-image">
+          <span class="availability-badge badge-available">Available</span>
+          <span class="location-badge">Lekki Phase 1</span>
+          <img src="lekki/property-lekki-penthouse-1.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Lekki Phase 1 Penthouse</h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 4 Bedrooms</span>
+            <span class="feature-badge">🚿 3 Bathrooms</span>
+            <span class="feature-badge">🏋️ Gym</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('lekki-penthouse')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 3: Executive Luxury Suite -->
+      <div class="property-card" data-category="lekki" data-property="executive-suite">
+        <div class="property-image">
+          <span class="availability-badge badge-booked">Booked</span>
+          <span class="location-badge">Lekki Phase 1</span>
+          <img src="executive/property-executive-suite-1.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Executive Luxury Suite</h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 3 Bedrooms</span>
+            <span class="feature-badge">🚿 3 Bathrooms</span>
+            <span class="feature-badge">📺 Smart TV</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('executive-suite')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 4: Cozy 2-Bed Escape -->
+      <div class="property-card" data-category="lekki 2bed" data-property="cozy-escape">
+        <div class="property-image">
+          <span class="availability-badge badge-available">Available</span>
+          <span class="location-badge">Lekki Phase 1</span>
+          <img src="cozy/property-cozy-escape-18.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Cozy 2-Bed Escape</h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 2 Bedrooms</span>
+            <span class="feature-badge">🚿 2 Bathrooms</span>
+            <span class="feature-badge">🍳 Full Kitchen</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('cozy-escape')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 5: Rooftop Pool Paradise -->
+      <div class="property-card" data-category="lekki 3bed" data-property="rooftop-paradise">
+        <div class="property-image">
+          <span class="availability-badge badge-available">Available</span>
+          <span class="location-badge">Lekki Phase 1</span>
+          <img src="rooftop/property-rooftop-paradise-1.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Rooftop Pool Paradise</h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 3 Bedrooms</span>
+            <span class="feature-badge">🚿 3 Bathrooms</span>
+            <span class="feature-badge">🏊 Rooftop Pool</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('rooftop-paradise')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 6: Akin Leigh Boutique -->
+      <div class="property-card" data-category="lekki 2bed" data-property="akin-leigh">
+        <div class="property-image">
+          <span class="availability-badge badge-available">Available</span>
+          <span class="location-badge">Akin Leigh, Lekki Phase 1</span>
+          <img src="akin-leigh/property-akin-leigh-1.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Akin Leigh </h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 2 Bedrooms</span>
+            <span class="feature-badge">🚿 2 Bathrooms</span>
+            <span class="feature-badge">🅿️ Parking</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('akin-leigh')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 7: Lekki Right Loft -->
+      <div class="property-card" data-category="lekki 1bed" data-property="lekki-loft">
+        <div class="property-image">
+          <span class="availability-badge badge-available">Available</span>
+          <span class="location-badge">Lekki Right</span>
+          <img src="lekki-loft/property-lekki-loft-1.jpg">
+        </div>
+        <div class="property-content">
+          <h3>Lekki Right Loft Studio</h3>
+          <div class="property-features">
+            <span class="feature-badge">🛏️ 1 Bedroom</span>
+            <span class="feature-badge">🚿 1 Bathroom</span>
+            <span class="feature-badge">📶 High-Speed WiFi</span>
+          </div>
+          <div class="property-cta">
+            <button class="btn-view" onclick="openModal('lekki-loft')">View Gallery & Book</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Hottest Apartment Section -->
+  <section class="featured-spotlight reveal">
+    <h2>🔥 Hottest Property Right Now</h2>
+    <p class="featured-subtitle">Most inquired apartment this week - Book fast!</p>
+    
+    <div style="max-width: 1200px; margin: 0 auto; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 30px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; position: relative; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);">
+      <div style="position: relative; height: 500px; overflow: hidden; background: linear-gradient(45deg, #c9a961, #a08549);">
+        <div style="position: absolute; top: 20px; left: 20px; background: #ff4444; color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; display: flex; align-items: center; gap: 0.5rem; animation: pulse 2s ease-in-out infinite; box-shadow: 0 5px 20px rgba(255, 68, 68, 0.4);">
+          <span style="animation: flicker 1.5s ease-in-out infinite;">🔥</span> HOTTEST DEAL
+        </div>
+        <!-- Replace with actual image -->
+        <img src="oniru.jpg" style="width: 100%; height: 100% ">
+      </div>
+      
+      <div style="padding: 3rem; display: flex; flex-direction: column; justify-content: center; color: white;">
+        <h3 style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 600; color: var(--primary);">Rooftop Pool Paradise</h3>
+        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; opacity: 0.9;">
+          Our most sought-after property! A stunning 3-bedroom apartment with an exclusive rooftop pool. Experience luxury living at its finest with breathtaking views and world-class amenities.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; opacity: 0.9;">
+            <span style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">✓</span>
+            <span>3 Master Bedrooms</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; opacity: 0.9;">
+            <span style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">✓</span>
+            <span>Rooftop Pool</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; opacity: 0.9;">
+            <span style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">✓</span>
+            <span>Smart Home</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; opacity: 0.9;">
+            <span style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">✓</span>
+            <span>City Views</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; opacity: 0.9;">
+            <span style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">✓</span>
+            <span>24/7 Security</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; opacity: 0.9;">
+            <span style="color: var(--primary); font-weight: 700; font-size: 1.2rem;">✓</span>
+            <span>Premium Gym</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 2rem; margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+          <div style="text-align: center;">
+            <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block;">84</span>
+            <span style="font-size: 0.85rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;">Inquiries</span>
+          </div>
+          <div style="text-align: center;">
+            <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block;">2,800</span>
+            <span style="font-size: 0.85rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;">SQ FT</span>
+          </div>
+          <div style="text-align: center;">
+            <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary); display: block;">Available</span>
+            <span style="font-size: 0.85rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;">Status</span>
+          </div>
+        </div>
+
+        <button class="btn" onclick="openModal('rooftop-paradise')" style="width: 100%; text-align: center;">View Gallery & Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials reveal">
+    <h2>What Our Guests Say</h2>
+    <p style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.1rem; margin-bottom: 4rem;">Real experiences from real guests</p>
+    
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+      <div style="background: rgba(255, 255, 255, 0.05); padding: 2.5rem; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: var(--transition);" onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)'">
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8; font-style: italic; opacity: 0.9; color: white;">
+          "The attention to detail blew me away! The rooftop pool was the highlight of our stay. Perfect for a weekend getaway with family. Highly recommend!"
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem; color: white;">
+            AM
+          </div>
+          <div>
+            <h4 style="font-weight: 600; margin-bottom: 0.2rem; color: white;">Adebayo Michael</h4>
+            <span style="font-size: 0.9rem; opacity: 0.7; color: rgba(255, 255, 255, 0.7);">Lekki Phase 1 Guest</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(255, 255, 255, 0.05); padding: 2.5rem; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: var(--transition);" onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)'">
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8; font-style: italic; opacity: 0.9; color: white;">
+          "Exceptional service from start to finish. The apartment was spotless, modern, and had everything we needed. The WhatsApp booking process was so easy!"
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem; color: white;">
+            CT
+          </div>
+          <div>
+            <h4 style="font-weight: 600; margin-bottom: 0.2rem; color: white;">Chioma Tunde</h4>
+            <span style="font-size: 0.9rem; opacity: 0.7; color: rgba(255, 255, 255, 0.7);">Oniru Villa Guest</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: rgba(255, 255, 255, 0.05); padding: 2.5rem; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); transition: var(--transition);" onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.transform='translateY(0)'">
+        <p style="font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8; font-style: italic; opacity: 0.9; color: white;">
+          "Best shortlet experience in Lagos! The amenities are top-notch, location is perfect, and the 24/7 support was reassuring. Will definitely book again!"
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem; color: white;">
+            OE
+          </div>
+          <div>
+            <h4 style="font-weight: 600; margin-bottom: 0.2rem; color: white;">Oluwaseun Emmanuel</h4>
+            <span style="font-size: 0.9rem; opacity: 0.7; color: rgba(255, 255, 255, 0.7);">Akin Leigh Guest</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section Styles -->
+  <style>
+    .testimonials {
+      padding: 6rem 2rem;
+      background: var(--dark);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials::before {
+      content: '"';
+      position: absolute;
+      top: -50px;
+      left: 50px;
+      font-size: 200px;
+      opacity: 0.05;
+      font-family: serif;
+    }
+
+    .testimonials h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    @media (max-width: 768px) {
+      .testimonials {
+        padding: 4rem 1rem;
+      }
+
+      .testimonials h2 {
+        font-size: 2rem;
+      }
+
+      .testimonials > div {
+        grid-template-columns: 1fr !important;
+      }
+
+      .featured-spotlight > div {
+        grid-template-columns: 1fr !important;
+      }
+
+      .featured-spotlight > div > div:first-child {
+        height: 300px !important;
+      }
+
+      .featured-spotlight > div > div:last-child {
+        padding: 2rem 1.5rem !important;
+      }
+
+      .featured-spotlight > div > div:last-child h3 {
+        font-size: 1.8rem !important;
+      }
+
+      .featured-spotlight > div > div:last-child > div:nth-child(3) {
+        grid-template-columns: 1fr !important;
+      }
+
+      .featured-spotlight > div > div:last-child > div:nth-child(4) {
+        flex-direction: column;
+        gap: 1rem !important;
+      }
+    }
+  </style>
+
+  <!-- Contact Section -->
+  <section class="contact reveal" id="contact-form">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+      <h2 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 300; letter-spacing: -1px;">Get In Touch</h2>
+      <p style="color: var(--gray); font-size: 1.1rem; margin-bottom: 3rem;">Have questions? Send us a message or book directly via WhatsApp</p>
+      
+      <form class="contact-form" onsubmit="handleContactSubmit(event)" style="display: grid; gap: 1.5rem;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 1.2rem; border: 2px solid rgba(0, 0, 0, 0.05); border-radius: 10px; font-size: 1rem; background: var(--white); transition: var(--transition); font-family: inherit;">
+          <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 1.2rem; border: 2px solid rgba(0, 0, 0, 0.05); border-radius: 10px; font-size: 1rem; background: var(--white); transition: var(--transition); font-family: inherit;">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+          <input type="tel" name="phone" placeholder="Phone Number" required style="width: 100%; padding: 1.2rem; border: 2px solid rgba(0, 0, 0, 0.05); border-radius: 10px; font-size: 1rem; background: var(--white); transition: var(--transition); font-family: inherit;">
+          <input type="text" name="property" placeholder="Property of Interest (Optional)" style="width: 100%; padding: 1.2rem; border: 2px solid rgba(0, 0, 0, 0.05); border-radius: 10px; font-size: 1rem; background: var(--white); transition: var(--transition); font-family: inherit;">
+        </div>
+        <textarea name="message" placeholder="Your message or special requests..." rows="5" style="width: 100%; padding: 1.2rem; border: 2px solid rgba(0, 0, 0, 0.05); border-radius: 10px; font-size: 1rem; background: var(--white); transition: var(--transition); font-family: inherit; resize: vertical; min-height: 150px;"></textarea>
+        <div style="margin-top: 1rem;">
+          <button type="submit" style="padding: 1rem 3rem; font-size: 1.1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border: none; color: var(--white); cursor: pointer; border-radius: 50px; font-weight: 500; transition: var(--transition); letter-spacing: 1px;">Send Message</button>
+        </div>
+      </form>
+
+      <div style="margin-top: 3rem; padding-top: 3rem; border-top: 2px solid rgba(0, 0, 0, 0.05);">
+        <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 1.1rem;">Or reach us directly via WhatsApp</p>
+        <a href="https://wa.me/2348039197608?text=Hi%2C%20I%27d%20like%20to%20know%20more%20about%20your%20luxury%20apartments" target="_blank" style="display: inline-flex; align-items: center; gap: 0.8rem; background: var(--green); color: white; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition); font-size: 1.1rem;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(37, 211, 102, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='none'">
+          <span style="font-size: 1.3rem;">💬</span>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .contact {
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary) !important;
+      box-shadow: 0 5px 20px rgba(201, 169, 97, 0.1);
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(201, 169, 97, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .contact {
+        padding: 4rem 1rem;
+      }
+
+      .contact h2 {
+        font-size: 2rem !important;
+      }
+
+      .contact-form > div {
+        grid-template-columns: 1fr !important;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        padding: 1rem !important;
+        font-size: 0.95rem !important;
+      }
+
+      .contact-form button {
+        padding: 0.9rem 2rem !important;
+        font-size: 1rem !important;
+      }
+    }
+  </style>
+
+  <!-- Property Modal -->
+  <div class="modal" id="propertyModal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="gallery-counter"><span id="currentImage">1</span> / <span id="totalImages">15</span></div>
+        <div class="modal-gallery" id="modalGallery">
+          <!-- Gallery images will be injected here -->
+        </div>
+        <div class="gallery-arrows">
+          <button class="gallery-arrow" onclick="previousImage()">‹</button>
+          <button class="gallery-arrow" onclick="nextImage()">›</button>
+        </div>
+        <div class="gallery-nav" id="galleryNav">
+          <!-- Dots will be injected here -->
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <h2 class="modal-title" id="modalTitle">Property Name</h2>
+        <p class="modal-location" id="modalLocation">Location</p>
+
+        <div class="modal-tabs">
+          <button class="tab-btn active" onclick="switchTab('amenities')">Amenities</button>
+          <button class="tab-btn" onclick="switchTab('availability')">Availability</button>
+          <button class="tab-btn" onclick="switchTab('details')">Details</button>
+        </div>
+
+        <!-- Amenities Tab -->
+        <div class="tab-content active" id="amenities-tab">
+          <div class="amenities-grid">
+            <div class="amenity-item">
+              <span class="amenity-icon">📶</span>
+              <span class="amenity-text">High-Speed WiFi</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">❄️</span>
+              <span class="amenity-text">Air Conditioning</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">📺</span>
+              <span class="amenity-text">Smart TV</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">🍳</span>
+              <span class="amenity-text">Fully Equipped Kitchen</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">🔒</span>
+              <span class="amenity-text">24/7 Security</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">⚡</span>
+              <span class="amenity-text">Backup Generator</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">🅿️</span>
+              <span class="amenity-text">Free Parking</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">🧺</span>
+              <span class="amenity-text">Washing Machine</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">🏋️</span>
+              <span class="amenity-text">Gym Access</span>
+            </div>
+            <div class="amenity-item">
+              <span class="amenity-icon">🏊</span>
+              <span class="amenity-text">Swimming Pool</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Availability Tab -->
+        <div class="tab-content" id="availability-tab">
+          <div class="calendar-section">
+            <div class="calendar-header">
+              <h3 id="calendarMonth">December 2024</h3>
+              <p style="color: var(--gray); margin-top: 0.5rem;">Select your dates and book via WhatsApp</p>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+              <!-- Calendar will be generated here -->
+            </div>
+            <div class="calendar-legend">
+              <div class="legend-item">
+                <div class="legend-color legend-available"></div>
+                <span>Available</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color legend-booked"></div>
+                <span>Booked</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Details Tab -->
+        <div class="tab-content" id="details-tab">
+          <div id="modalDetails">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--gray); margin-bottom: 2rem;">
+              Experience luxury living in this meticulously designed apartment. Every detail has been carefully considered to provide you with the ultimate comfort and style during your stay.
+            </p>
+            <h3 style="margin-bottom: 1rem;">What's Included:</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li style="padding: 0.5rem 0; color: var(--gray);">✓ Fresh linens and towels</li>
+              <li style="padding: 0.5rem 0; color: var(--gray);">✓ Complimentary toiletries</li>
+              <li style="padding: 0.5rem 0; color: var(--gray);">✓ 24/7 concierge service</li>
+              <li style="padding: 0.5rem 0; color: var(--gray);">✓ Cleaning service available</li>
+              <li style="padding: 0.5rem 0; color: var(--gray);">✓ Welcome package</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- WhatsApp Booking Section -->
+        <div class="whatsapp-section">
+          <h3>Ready to Book?</h3>
+          <p>Chat with us on WhatsApp for pricing and availability</p>
+          <button class="btn-whatsapp" onclick="bookViaWhatsApp()">Book Now via WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-logo">Mandate Properties</div>
+      <p style="color: rgba(255, 255, 255, 0.7); margin: 1rem 0;">Luxury Shortlet Apartments in Lagos</p>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#properties">Properties</a>
+        <a href="https://wa.me/2348039197608" target="_blank">Contact Us</a>
+      </div>
+      <div class="social-icons">
+        <div class="social-icon" onclick="window.open('https://facebook.com', '_blank')">f</div>
+        <div class="social-icon" onclick="window.open('https://twitter.com', '_blank')">𝕏</div>
+        <div class="social-icon" onclick="window.open('https://instagram.com', '_blank')">📷</div>
+        <div class="social-icon" onclick="window.open('https://wa.me/2348012345678', '_blank')">💬</div>
+      </div>
+      <div class="copyright">
+        &copy; 2025 Mandate Properties. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== CONFIGURATION ====================
+    const WHATSAPP_NUMBER = '2348039197608'; // Replace with your actual number
+    
+    // Property data stored in memory
+    const properties = {
+      'oniru-villa': {
+        name: 'Oniru Luxury 4-Bed Villa',
+        location: 'Oniru, Victoria Island',
+        beds: 4,
+        baths: 4,
+        folder: 'oniru',
+        images: 16 // Number of images
+      },
+      'lekki-penthouse': {
+        name: 'Lekki Phase 1 Penthouse',
+        location: 'Lekki Phase 1',
+        beds: 4,
+        baths: 3,
+        folder: 'lekki',
+        images: 18
+      },
+      'executive-suite': {
+        name: 'Executive Luxury Suite',
+        location: 'Lekki Phase 1',
+        beds: 3,
+        baths: 3,
+        folder: 'executive',
+        images: 11
+      },
+      'cozy-escape': {
+        name: 'Cozy 2-Bed Escape',
+        location: 'Lekki Phase 1',
+        beds: 2,
+        baths: 2,
+        folder: 'cozy',
+        images: 16
+      },
+      'rooftop-paradise': {
+        name: 'Rooftop Pool Paradise',
+        location: 'Lekki Phase 1',
+        beds: 3,
+        baths: 3,
+        folder: 'rooftop',
+        images: 20
+      },
+      'akin-leigh': {
+        name: 'Akin Leigh Boutique Apartment',
+        location: 'Akin Leigh Crescent, Lekki Phase 1',
+        beds: 2,
+        baths: 2,
+        folder: 'akin-leigh',
+        images: 16
+      },
+      'lekki-loft': {
+        name: 'Lekki Right Loft Studio',
+        location: 'Lekki Right',
+        beds: 1,
+        baths: 1,
+        folder: 'lekki-loft',
+        images: 15
+      }
+    };
+
+    let currentProperty = null;
+    let currentImageIndex = 0;
+    let selectedDates = [];
+
+    // ==================== NAVIGATION ====================
+    const header = document.getElementById('header');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // ==================== SMOOTH SCROLL ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ==================== PROPERTY FILTERING ====================
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const propertyCards = document.querySelectorAll('.property-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        propertyCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 10);
+          } else {
+            const categories = card.getAttribute('data-category');
+            if (categories && categories.includes(filter)) {
+              card.style.display = 'block';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 10);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.8)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 400);
+            }
+          }
+        });
+      });
+    });
+
+    // ==================== MODAL FUNCTIONS ====================
+    function openModal(propertyId) {
+      currentProperty = propertyId;
+      const property = properties[propertyId];
+      const modal = document.getElementById('propertyModal');
+      
+      // Set property details
+      document.getElementById('modalTitle').textContent = property.name;
+      document.getElementById('modalLocation').textContent = property.location;
+      
+      // Generate gallery
+      generateGallery(property.images);
+      
+      // Generate calendar
+      generateCalendar();
+      
+      // Show modal
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Reset to first image
+      currentImageIndex = 0;
+      scrollToImage(0);
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('propertyModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      selectedDates = [];
+    }
+
+   function generateGallery(imageCount) {
+  const gallery = document.getElementById('modalGallery');
+  const nav = document.getElementById('galleryNav');
+  
+  gallery.innerHTML = '';
+  nav.innerHTML = '';
+  
+  // Update total images
+  document.getElementById('totalImages').textContent = imageCount;
+  
+  for (let i = 1; i <= imageCount; i++) {
+    // Create gallery item with folder path
+    const imagePath = `${properties[currentProperty].folder}/property-${currentProperty}-${i}.jpg`;
+    
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.innerHTML = `
+      <img src="${imagePath}" 
+           alt="${properties[currentProperty].name} - Image ${i}"
+           onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22600%22%3E%3Crect fill=%22%23c9a961%22 width=%22800%22 height=%22600%22/%3E%3Ctext fill=%22%23fff%22 font-family=%22Arial%22 font-size=%2236%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EImage ${i} of ${imageCount}%3C/text%3E%3C/svg%3E'">
+    `;
+    gallery.appendChild(item);
+    
+    // Create nav dot
+    const dot = document.createElement('div');
+    dot.className = 'gallery-dot' + (i === 1 ? ' active' : '');
+    dot.onclick = () => scrollToImage(i - 1);
+    nav.appendChild(dot);
+  }
+  
+  // Add scroll listener for updating dots
+  gallery.addEventListener('scroll', updateGalleryDots);
+}
+
+    function scrollToImage(index) {
+      const gallery = document.getElementById('modalGallery');
+      const items = gallery.querySelectorAll('.gallery-item');
+      
+      if (items[index]) {
+        items[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+        currentImageIndex = index;
+        document.getElementById('currentImage').textContent = index + 1;
+        updateActiveDot(index);
+      }
+    }
+
+    function updateGalleryDots() {
+      const gallery = document.getElementById('modalGallery');
+      const scrollLeft = gallery.scrollLeft;
+      const itemWidth = gallery.querySelector('.gallery-item').offsetWidth;
+      const index = Math.round(scrollLeft / itemWidth);
+      
+      currentImageIndex = index;
+      document.getElementById('currentImage').textContent = index + 1;
+      updateActiveDot(index);
+    }
+
+    function updateActiveDot(index) {
+      const dots = document.querySelectorAll('.gallery-dot');
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function previousImage() {
+      if (currentImageIndex > 0) {
+        scrollToImage(currentImageIndex - 1);
+      }
+    }
+
+    function nextImage() {
+      const totalImages = parseInt(document.getElementById('totalImages').textContent);
+      if (currentImageIndex < totalImages - 1) {
+        scrollToImage(currentImageIndex + 1);
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('propertyModal');
+      if (modal.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') previousImage();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'Escape') closeModal();
+      }
+    });
+
+    // ==================== TAB SWITCHING ====================
+    function switchTab(tabName) {
+      // Remove active class from all tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Add active class to selected tab
+      event.target.classList.add('active');
+      document.getElementById(tabName + '-tab').classList.add('active');
+    }
+
+    // ==================== CALENDAR GENERATION ====================
+    function generateCalendar() {
+      const grid = document.getElementById('calendarGrid');
+      const monthEl = document.getElementById('calendarMonth');
+      
+      // Get current date
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
+      const currentDay = now.getDate();
+      
+      // Set month name
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                         'July', 'August', 'September', 'October', 'November', 'December'];
+      monthEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+      
+      grid.innerHTML = '';
+      
+      // Add day labels
+      const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      dayLabels.forEach(day => {
+        const label = document.createElement('div');
+        label.className = 'calendar-day-label';
+        label.textContent = day;
+        grid.appendChild(label);
+      });
+      
+      // Get first day of month and total days
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      
+      // Add empty cells for days before month starts
+      for (let i = 0; i < firstDay; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'calendar-day';
+        grid.appendChild(emptyDay);
+      }
+      
+      // Generate random booked dates (simulate real availability)
+      const bookedDates = generateRandomBookedDates(daysInMonth, currentDay);
+      
+      // Add days of the month
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayEl = document.createElement('div');
+        dayEl.className = 'calendar-day';
+        dayEl.textContent = day;
+        
+        if (day === currentDay) {
+          dayEl.classList.add('today');
+        }
+        
+        if (day < currentDay) {
+          // Past dates
+          dayEl.classList.add('booked');
+        } else if (bookedDates.includes(day)) {
+          // Random booked dates
+          dayEl.classList.add('booked');
+        } else {
+          // Available dates
+          dayEl.classList.add('available');
+          dayEl.addEventListener('click', () => selectDate(day, currentMonth, currentYear, dayEl));
+        }
+        
+        grid.appendChild(dayEl);
+      }
+    }
+
+    function generateRandomBookedDates(totalDays, currentDay) {
+      const booked = [];
+      const numberOfBookedDays = Math.floor(Math.random() * 5) + 3; // 3-7 booked days
+      
+      for (let i = 0; i < numberOfBookedDays; i++) {
+        const randomDay = Math.floor(Math.random() * (totalDays - currentDay)) + currentDay + 1;
+        if (!booked.includes(randomDay)) {
+          booked.push(randomDay);
+        }
+      }
+      
+      return booked;
+    }
+
+    function selectDate(day, month, year, element) {
+      const dateString = `${year}-${month + 1}-${day}`;
+      
+      if (selectedDates.includes(dateString)) {
+        // Deselect date
+        selectedDates = selectedDates.filter(d => d !== dateString);
+        element.style.background = 'rgba(68, 255, 136, 0.1)';
+      } else {
+        // Select date
+        selectedDates.push(dateString);
+        element.style.background = 'var(--primary)';
+        element.style.color = 'white';
+      }
+    }
+
+    // ==================== WHATSAPP BOOKING ====================
+    function bookViaWhatsApp() {
+      if (!currentProperty) return;
+      
+      const property = properties[currentProperty];
+      let message = `Hi, I'm interested in booking the *${property.name}* in ${property.location}.`;
+      
+      if (selectedDates.length > 0) {
+        const sortedDates = selectedDates.sort();
+        message += `\n\nSelected dates: ${sortedDates.join(', ')}`;
+      }
+      
+      message += '\n\nPlease send me details and pricing.';
+      
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // ==================== SCROLL REVEAL ANIMATION ====================
+    function reveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', reveal);
+    reveal(); // Initial check
+
+    // ==================== STAT COUNTER ANIMATION ====================
+    function animateCounter(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      const hasPlus = element.textContent.includes('+');
+      const hasPercent = element.textContent.includes('%');
+      
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          start = target;
+          clearInterval(timer);
+          element.textContent = target + (hasPercent ? '%' : hasPlus ? '+' : '');
+        } else {
+          element.textContent = Math.floor(start) + (hasPercent ? '%' : hasPlus ? '+' : '');
+        }
+      }, 16);
+    }
+
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.stat-number');
+          counters.forEach(counter => {
+            const text = counter.textContent;
+            if (text.includes('24/7')) {
+              counter.textContent = '24/7';
+            } else {
+              const target = parseInt(text.replace(/[^0-9]/g, ''));
+              animateCounter(counter, target);
+            }
+          });
+          statObserver.unobserve(entry.target);
+        }
+      });
+    });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statObserver.observe(heroStats);
+
+    // ==================== PARALLAX EFFECT ====================
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroBg = document.querySelector('.hero-bg');
+      if (heroBg && scrolled < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+
+    // ==================== TOUCH SWIPE FOR MOBILE ====================
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const modalGallery = document.getElementById('modalGallery');
+    if (modalGallery) {
+      modalGallery.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      modalGallery.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      if (touchStartX - touchEndX > swipeThreshold) {
+        nextImage();
+      }
+      if (touchEndX - touchStartX > swipeThreshold) {
+        previousImage();
+      }
+    }
+
+    // ==================== INITIALIZE ====================
+    window.addEventListener('load', () => {
+      reveal();
+      console.log('%c🏠 Mandate Properties - Luxury Shortlets', 'color: #c9a961; font-size: 16px; font-weight: bold;');
+      console.log('%c✨ Mobile-first immersive experience', 'color: #666; font-size: 12px;');
+    });
+
+    // Close modal when clicking outside content (on backdrop)
+    document.getElementById('propertyModal').addEventListener('click', (e) => {
+      if (e.target.id === 'propertyModal') {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
